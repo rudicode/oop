@@ -1,14 +1,17 @@
 #
 class Rover
-  attr_reader :x, :y, :direction
+  attr_reader :x, :y
   attr_accessor :direction
 
   def initialize x_coordinate, y_coordinate, direction
-    # consider if there should be a Point class to inherit from
     @x = x_coordinate
     @y = y_coordinate
     @direction_sequence = ['N','E','S','W']
     @direction = direction
+  end
+
+  def position
+    "#{@x} #{@y} #{@direction}"
   end
 
   def left
@@ -37,6 +40,17 @@ class Rover
       @y -= 1
     end
   end
+
+  def read_instruction instruction
+    case instruction
+    when 'L'
+      left
+    when 'R'
+      right
+    when 'F'
+      forward
+    end
+  end
 end
 
 class MissionControl
@@ -44,13 +58,9 @@ class MissionControl
     @rovers = []
   end
 
-  def execute_control_code code
-    @code = code
-    @plateau = extract_plateau
-  end
-
   def rovers_count
     @rovers.count
   end
+
 end
 

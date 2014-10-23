@@ -14,6 +14,7 @@ describe MissionControl do
   end
 
   it "should create two rovers" do
+    pending
     @mission_control.execute_control_code @test_input
     @rovers = @mission_control.rovers
     expect(@mission_control.rovers_count).to eq 2
@@ -28,34 +29,62 @@ describe Rover do
   end
 
 
-  it "should know it's location and direction" do
-    @rover.x.should be 1
-    @rover.y.should be 2
-    @rover.direction.should eq 'N'
-    expect(@rover.direction).to eq 'N'
+  it "should know it's position and direction" do
+    position = @rover.position
+    expect(position).to eq '1 2 N'
   end
 
-  it "should rotate 90deg left given command left" do
-    @rover.left
-    expect(@rover.direction).to eq 'W'
-    @rover.left
-    expect(@rover.direction).to eq 'S'
-    @rover.left
-    expect(@rover.direction).to eq 'E'
-    @rover.left
-    expect(@rover.direction).to eq 'N'
+  describe "commands" do
+
+    it "should execute command L" do
+      @rover.read_instruction 'L'
+      expect(@rover.direction).to eq 'W'
+    end
+
+    it "should execute command R" do
+      @rover.read_instruction 'R'
+      expect(@rover.direction).to eq 'E'
+    end
+
+    it "should execute command F" do
+      @rover.read_instruction 'F'
+      expect(@rover.x).to eq 1
+      expect(@rover.y).to eq 3
+    end
+
   end
 
-  it "should rotate 90deg right given command right" do
-    @rover.right
-    expect(@rover.direction).to eq 'E'
-    @rover.right
-    expect(@rover.direction).to eq 'S'
-    @rover.right
-    expect(@rover.direction).to eq 'W'
-    @rover.right
-    expect(@rover.direction).to eq 'N'
+  describe "rotation" do
+
+    it "should rotate 360deg given instructions LLLL" do
+      @rover.read_instruction 'L'
+      expect(@rover.direction).to eq 'W'
+
+      @rover.read_instruction 'L'
+      expect(@rover.direction).to eq 'S'
+
+      @rover.read_instruction 'L'
+      expect(@rover.direction).to eq 'E'
+
+      @rover.read_instruction 'L'
+      expect(@rover.direction).to eq 'N'
+    end
+
+    it "should rotate 360deg given instructions RRRR" do
+      @rover.read_instruction 'R'
+      expect(@rover.direction).to eq 'E'
+
+      @rover.read_instruction 'R'
+      expect(@rover.direction).to eq 'S'
+
+      @rover.read_instruction 'R'
+      expect(@rover.direction).to eq 'W'
+
+      @rover.read_instruction 'R'
+      expect(@rover.direction).to eq 'N'
+    end
   end
+
 
   describe 'movement' do
     before :each do
