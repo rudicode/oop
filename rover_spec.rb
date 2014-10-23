@@ -46,8 +46,8 @@ describe Rover do
       expect(@rover.direction).to eq 'E'
     end
 
-    it "should execute command F" do
-      @rover.read_instruction 'F'
+    it "should execute command M" do
+      @rover.read_instruction 'M'
       expect(@rover.x).to eq 1
       expect(@rover.y).to eq 3
     end

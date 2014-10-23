@@ -25,6 +25,7 @@ class Rover
   end
 
   def forward
+# a = 2 / 0
     case @direction
     when 'N'
       @y += 1
@@ -34,6 +35,7 @@ class Rover
       @x -= 1
     when 'S'
       @y -= 1
+
     end
   end
 
@@ -43,7 +45,7 @@ class Rover
       left
     when 'R'
       right
-    when 'F'
+    when 'M'
       forward
     end
   end

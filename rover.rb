@@ -20,7 +20,6 @@ instructions.each_char do |char|
   @rover1.read_instruction char
 end
 puts @rover1.position
-
 @rover2 = Rover.new 3,3,'E'
 instructions = 'MMRMMRMRRM'
 instructions.each_char do |char|
