@@ -1,4 +1,4 @@
-require_relative './rover'
+require_relative './rover_lib'
 
 describe MissionControl do
   before :each do
@@ -16,7 +16,7 @@ describe MissionControl do
   it "should create two rovers" do
     @mission_control.execute_control_code @test_input
     @rovers = @mission_control.rovers
-    expect(@rovers.count).to eq 2
+    expect(@mission_control.rovers_count).to eq 2
   end
 
 end

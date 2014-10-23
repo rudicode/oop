@@ -41,10 +41,16 @@ end
 
 class MissionControl
   def initialize
+    @rovers = []
   end
 
   def execute_control_code code
     @code = code
+    @plateau = extract_plateau
+  end
+
+  def rovers_count
+    @rovers.count
   end
 end
 
