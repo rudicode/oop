@@ -14,9 +14,16 @@ require_relative './rover_lib'
 #   puts result
 # end
 
-@rover = Rover.new 1,2,'N'
+@rover1 = Rover.new 1,2,'N'
 instructions = 'LMLMLMLMM'
 instructions.each_char do |char|
-  @rover.read_instruction char
+  @rover1.read_instruction char
 end
-puts @rover.position
+puts @rover1.position
+
+@rover2 = Rover.new 3,3,'E'
+instructions = 'MMRMMRMRRM'
+instructions.each_char do |char|
+  @rover2.read_instruction char
+end
+puts @rover2.position
